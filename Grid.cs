@@ -10,15 +10,33 @@ namespace SudokuNet
     public class Grid
     {
         public int[,] values { get; set; } = new int[9, 9];
-        
+
         public Grid() { }
+
+        public Grid(GetPreGeneratedGridDto? getPreGeneratedGridDto)
+        {
+            if (getPreGeneratedGridDto != null)
+            {
+                for (int i = 0; i < 9; i++)
+                {
+                    for (int j = 0; j < 9; j++)
+                    {
+                        values[i, j] = getPreGeneratedGridDto.board[i][j];
+                    }
+                }
+            }
+            else
+            {
+                throw new Exception();
+            }
+        }
 
         public override string ToString()
         {
             var sb = new StringBuilder();
-            for(int i = 0; i < 9; i++)
+            for (int i = 0; i < 9; i++)
             {
-                for(int j = 0; j < 9; j++)
+                for (int j = 0; j < 9; j++)
                 {
                     sb.Append(values[i, j]);
                     sb.Append(' ');
